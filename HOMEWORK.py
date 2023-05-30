@@ -29,17 +29,19 @@ class Lecturer(Mentor):
         self.grades = {}
     
     def __str__(self):
-        some_lecturer = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: '
+        some_lecturer = (f'Имя: {self.name}\n'
+                         f'Фамилия: {self.surname}\n'
+                         f'Средняя оценка за лекции: ')
         return some_lecturer
 
 class Reviewer(Mentor):
-    def rate_hw(self, student, course, grade):
-        if (isinstance(student, Student) and course in self.courses_attached
-            and course in student.courses_in_progress):
-            if course in student.grades:
-                student.grades[course] += [grade]
+    def rate_hw(self, reviewer, course, grade):
+        if (isinstance(reviewer, Reviewer) and course in self.courses_attached
+            and course in reviewer.courses_in_progress):
+            if course in reviewer.grades:
+                reviewer.grades[course] += [grade]
             else:
-                student.grades[course] = [grade]
+                reviewer.grades[course] = [grade]
         else:
             return 'Ошибка'
 
