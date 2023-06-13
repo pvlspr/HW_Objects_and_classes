@@ -40,12 +40,20 @@ class Student(Mentor):
                 f'{Lecturer.mean_grades(self)}\n'
                 f'Курсы в процессе изучения: '
                 f'{", ".join(self.courses_in_progress)}\n'
-                f'Завершенные курсы: {", ".join(self.finished_courses)}')
+                f'Завершенные курсы: {", ".join(self.finished_courses)}') 
 
     def __lt__(self, other):
         if not isinstance(other, Lecturer) :
             print('Оценок нет')
-        return self.Lecturer < other.Lecturer   
+        return self.Lecturer < other.Lecturer
+    
+    def student_average_grade(self):
+        students_grade_list = []
+        for s_g_l in self.grades.items():
+            for i in s_g_l:
+                grade_list.append(i)
+        result = round(sum(grade_list) / len(grade_list), 2)
+        return result       
 
 
 class Lecturer(Mentor):
@@ -61,6 +69,14 @@ class Lecturer(Mentor):
         if not isinstance(other, Lecturer.mean_grades) :
             print('Оценок нет')
         return self.Lecturer.mean_grades < other.Lecturer.mean_grades
+    
+    def lecturer_average_grade(self):
+        lecturers_grade_list = []
+        for l_g_l in self.grades.items():
+            for i in l_g_l:
+                grade_list.append(i)
+        result = round(sum(grade_list) / len(grade_list), 2)
+        return result    
     
 
 class Reviewer(Mentor):
