@@ -1,6 +1,5 @@
 from statistics import mean
 
-
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -43,10 +42,13 @@ class Student(Mentor):
                 f'{", ".join(self.courses_in_progress)}\n'
                 f'Завершенные курсы: {", ".join(self.finished_courses)}')
 
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer) :
+            print('Оценок нет')
+        return self.Lecturer < other.Lecturer   
 
 
 class Lecturer(Mentor):
-
     def __init__(self, name, surname):
         super().__init__(name, surname)
 
@@ -54,10 +56,14 @@ class Lecturer(Mentor):
         return (f'\nИмя: {self.name}\n'
                 f'Фамилия: {self.surname}\n'
                 f'Средняя оценка за лекции: {Lecturer.mean_grades(self)}')
-
+    
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer.mean_grades) :
+            print('Оценок нет')
+        return self.Lecturer.mean_grades < other.Lecturer.mean_grades
+    
 
 class Reviewer(Mentor):
-
     def __init__(self, name, surname):
         super().__init__(name, surname)
 
@@ -76,9 +82,9 @@ class Reviewer(Mentor):
         return f"\nИмя: {self.name}\nФамилия: {self.surname}"
 
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
-best_student.finished_courses += ['Git']
+best_student = Student('Ruoy', 'Eman', 'gender')
+best_student.courses_in_progress += ['Python', 'Git']
+best_student.finished_courses += ['Введение в программирование']
 
 cool_reviewer = Reviewer('Some', 'Buddy')
 cool_reviewer.courses_attached += ['Python']
@@ -93,8 +99,8 @@ print(best_student.grades)
 lecturer = Lecturer('Some', 'Buddy')
 lecturer.courses_attached += ['Python']
 
-best_student.rate_hw(lecturer, 'Python', 10)
-best_student.rate_hw(lecturer, 'Python', 10)
+best_student.rate_hw(lecturer, 'Python', 9.9)
+best_student.rate_hw(lecturer, 'Python', 9.9)
 best_student.rate_hw(lecturer, 'Python', 10)
 
 print(lecturer.grades)
